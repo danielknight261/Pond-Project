@@ -3,15 +3,17 @@ import React from 'react';
 export default function HeroSection() {
   return (
     <div className="relative">
-      <div className="relative h-screen">
+      <div className="h-auto">
         <img
-          className="w-full h-1/2 md:h-full object-cover"
-          style={{ height: "50vh" }}
+          className="w-full justify-self-center h-100 md:min-w-fi"
           src="/hero-image.jpg"
           alt="Hero background image"
+          layout='fill'
+          objectFit='cover'
+          objectPosition='center'
         />
         <div className="absolute inset-0 flex justify-center items-center">
-          <div className="container mx-auto relative z-10" style={{top: "-20%"}}>
+          <div className="container mx-auto relative z-10 mt-12 md:mt-0">
             <form className="max-w-lg mx-auto bg-white rounded-lg p-6">
               <div className="flex items-center border-b border-b-2 border-teal-500 py-2">
                 <input

@@ -1,7 +1,9 @@
 import Head from 'next/head';
-import Nav from '../components/Nav'
 import HeroSection from '../components/HeroSection';
 import ImageContainer from '../components/ImageContainer';
+import Nav from '../components/Nav'
+import Footer from '../components/Footer'
+
 
 export default function Home() {
   return (
@@ -9,10 +11,12 @@ export default function Home() {
       <Head>
         <title>Picture Pond</title>
       </Head>
-
-     <Nav />
+      <Nav />
+     {/* <Nav /> Wrapped */}
      <HeroSection />
      <ImageContainer />
+     {/* <Footer /> Wrapped */}
+     <Footer />
    
     </div>
   );
