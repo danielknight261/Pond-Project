@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function HeroSection() {
+const HeroSection = () => {
   return (
     <div className="relative">
       <div className="h-auto">
@@ -42,3 +42,5 @@ export default function HeroSection() {
     </div>
   );
 }
+
+export default HeroSection

@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { useUser } from '@auth0/nextjs-auth0';
+// import { useUser } from '@auth0/nextjs-auth0';
 
-export default function Navbar() {
-  const { user, isLoading } = useUser();
+const Nav = () => {
+  // const { user, isLoading } = useUser();
 
   return (
     <nav className="bg-gray-800">
@@ -20,23 +20,29 @@ export default function Navbar() {
           </div>
           <div className="">
             <div className="ml-4 flex items-center md:ml-6">
-              <Link href="/" passHref>
+              <Link href="/">
                 <button className="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
                   Explore
                 </button>
               </Link>
 
+              <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
+                <Link href="/logout">
+                  Logout
+                </Link>
+              </button>
 
-              {!isLoading &&
-                user ? 
-                   <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
-<Link href="/api/auth/logout">Logout</Link>
-                   </button>
-                 : 
-                  <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
-                    <Link href="/api/auth/login">Login</Link>
-                  </button>
-              }
+              <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
+                <Link href="/login">
+                  Login
+                </Link>
+              </button>
+
+              <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
+                <Link href="/Upload">
+                  Upload
+                </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -44,3 +50,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
+export default <Nav></Nav>

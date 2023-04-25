@@ -3,7 +3,7 @@ import { FaThumbsUp, FaDownload } from 'react-icons/fa';
 
 
 
-function ImageContainer({ images }) {
+const ImageContainer = ({ images }) => {
   const mockImages = [
     {
       id: 1,
