@@ -12,6 +12,14 @@ const HeroSection = () => {
           objectFit='cover'
           objectPosition='center'
         />
+        {/* <Image
+          className="w-full justify-self-center h-100 md:min-w-fi"
+          src="/hero-image.jpg"
+          alt="Hero background image"
+          layout="fill"
+          objectFit="cover"
+          objectPosition="center"
+        /> */}
         <div className="absolute inset-0 flex justify-center items-center">
           <div className="container mx-auto relative z-10 mt-12 md:mt-0">
             <form className="max-w-lg mx-auto bg-white rounded-lg p-6">
@@ -43,4 +51,4 @@ const HeroSection = () => {
   );
 }
 
-export default HeroSection
+export default HeroSection;

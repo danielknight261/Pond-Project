@@ -3,6 +3,7 @@ import HeroSection from '../components/HeroSection';
 import ImageContainer from '../components/ImageContainer';
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import Profile from '../components/Profile';
 
 
 export default function Home() {
@@ -12,11 +13,17 @@ export default function Home() {
         <title>Picture Pond</title>
       </Head>
       <Nav />
+      <main>
      {/* <Nav /> Wrapped */}
+     <Profile />
+        {/* Add other content here */}
+     </main>
      <HeroSection />
      <ImageContainer />
      {/* <Footer /> Wrapped */}
+
      <Footer />
+
    
     </div>
   );

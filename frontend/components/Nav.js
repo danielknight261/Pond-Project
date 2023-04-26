@@ -1,8 +1,10 @@
 import Link from "next/link";
-// import { useUser } from '@auth0/nextjs-auth0';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 const Nav = () => {
-  // const { user, isLoading } = useUser();
+  const { user, error, isLoading } = useUser();
+
+  const uploadLink = user ? '/Upload' : '/api/auth/login';
 
   return (
     <nav className="bg-gray-800">
@@ -26,23 +28,26 @@ const Nav = () => {
                 </button>
               </Link>
 
-              <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
-                <Link href="/logout">
-                  Logout
+              {user ? (
+                <Link href="/api/auth/logout">
+                  <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
+                    Logout
+                  </button>
                 </Link>
-              </button>
-
-              <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
-                <Link href="/login">
-                  Login
+              ) : (
+                <Link href="/api/auth/login">
+                  <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
+                    Login
+                  </button>
                 </Link>
-              </button>
+              )}
 
-              <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
-                <Link href="/Upload">
+              
+              <Link href={uploadLink}>
+                <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
                   Upload
-                </Link>
-              </button>
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -51,4 +56,4 @@ const Nav = () => {
   );
 }
 
-export default <Nav></Nav>
+export default Nav;

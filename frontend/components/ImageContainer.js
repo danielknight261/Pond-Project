@@ -1,5 +1,7 @@
 import React from 'react';
 import { FaThumbsUp, FaDownload } from 'react-icons/fa';
+import { useRouter } from 'next/router';
+
 
 
 
