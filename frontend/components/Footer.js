@@ -1,10 +1,14 @@
+// Define the Footer component
 const Footer = () => {
+  // Return the JSX markup for the Footer component
   return (
     <footer className="bg-gray-800 text-white py-6 w-full">
       <div className="container mx-auto text-center">
+        {/* Display the copyright text with the current year */}
         <p className="text-lg">
-          &copy; {new Date().getFullYear()} Your Company Name. All rights reserved.
+          &copy; {new Date().getFullYear()} Pond All rights reserved.
         </p>
+        {/* Render the navigation links */}
         <nav className="mt-4 space-x-4">
           <a
             href="#"
@@ -36,4 +40,5 @@ const Footer = () => {
   );
 };
 
+// Export the Footer component as the default export
 export default Footer;

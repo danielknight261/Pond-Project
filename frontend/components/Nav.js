@@ -1,18 +1,25 @@
+// Import required dependencies
 import Link from "next/link";
 import { useUser } from '@auth0/nextjs-auth0/client';
 
+// Define the Nav component
 const Nav = () => {
+  // Use the Auth0 useUser hook to get user information
   const { user, error, isLoading } = useUser();
 
+  // Set the upload link based on whether the user is logged in or not
   const uploadLink = user ? '/Upload' : '/api/auth/login';
 
+  // Render the Nav component
   return (
     <nav className="bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+          {/* Render the logo */}
           <div className="flex-shrink-0">
-            <img className="h-10 " src="/logo.jpg" alt="Logo" />
+            <img className="h-10" src="/logo.jpg" alt="Logo" />
           </div>
+          {/* Render the search input */}
           <div className="ml-4 flex items-center md:ml-6">
             <input
               type="text"
@@ -20,14 +27,17 @@ const Nav = () => {
               placeholder="Search"
             />
           </div>
+          {/* Render the navigation buttons */}
           <div className="">
             <div className="ml-4 flex items-center md:ml-6">
+              {/* Explore button */}
               <Link href="/">
                 <button className="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
                   Explore
                 </button>
               </Link>
 
+              {/* Login/Logout button based on user's authentication state */}
               {user ? (
                 <Link href="/api/auth/logout">
                   <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
@@ -42,7 +52,7 @@ const Nav = () => {
                 </Link>
               )}
 
-              
+              {/* Upload button */}
               <Link href={uploadLink}>
                 <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
                   Upload
@@ -56,4 +66,5 @@ const Nav = () => {
   );
 }
 
+// Export the Nav component as the default export
 export default Nav;
