@@ -11,7 +11,7 @@ const Nav = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <img className="h-8 w-8" src="/logo.svg" alt="Logo" />
+            <img className="h-10 " src="/logo.jpg" alt="Logo" />
           </div>
           <div className="ml-4 flex items-center md:ml-6">
             <input
