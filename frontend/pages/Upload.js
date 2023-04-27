@@ -21,15 +21,15 @@ const Upload = () => {
     previewFiles(file);
   };
 
-  const handleSubmit = async() => {
+  const handleSubmit = async (e) => { 
     e.preventDefault();
     const result = await axios.post("http://localhost:8001", {
-        image: image
-    })
-    try{
-console.log(result.data)
-    }catch(err){
-        console.log(err);
+      image: image
+    });
+    try {
+      console.log(result.data);
+    } catch (err) {
+      console.log(err);
     }
   };
 

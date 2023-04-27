@@ -17,24 +17,18 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
   const { image } = req.body;
 
-  // Upload
-  const uploadedImage = await cloudinary.uploader.upload(image, {
-      upload_preset: "unsigned_upload",
-      public_id: "avatar",
-      allowed_formats: ["png", "jpg", "jpeg", "svg", "ico", "jfif", "webp"]
-    },
-    function(error, result) {
-      if (error) {
-        console.log(error);
-      }
-      console.log(result);
-    }
-  );
-
   try {
+    // Upload
+    const uploadedImage = await cloudinary.uploader.upload(image, {
+      upload_preset: "unsigned_upload",
+      public_id: "User_Pictures",
+      allowed_formats: ["png", "jpg", "jpeg", "svg", "ico", "jfif", "webp"]
+    });
+
     res.json(uploadedImage);
   } catch (err) {
     console.log(err);
+    res.status(500).json({ error: "An error occurred while uploading the image" });
   }
 });
 
