@@ -8,7 +8,7 @@ const Nav = () => {
   const { user, error, isLoading } = useUser();
 
   // Set the upload link based on whether the user is logged in or not
-  const uploadLink = user ? '/Upload' : '/api/auth/login';
+  const uploadLink = user ? "/Upload" : "/api/auth/login";
 
   // Render the Nav component
   return (
@@ -52,11 +52,17 @@ const Nav = () => {
                 </Link>
               )}
 
-              {/* Upload button */}
+              {/* Upload button with conditional link */}
               <Link href={uploadLink}>
-                <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
-                  Upload
-                </button>
+                {user ? (
+                  <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">
+                    Upload
+                  </button>
+                ) : (
+                  <button className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 cursor-pointer">
+                    Upload
+                  </button>
+                )}
               </Link>
             </div>
           </div>

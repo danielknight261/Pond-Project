@@ -20,9 +20,11 @@ export default function Home() {
      </main>
      <HeroSection />
      <ImageContainer />
+    
      {/* <Footer /> Wrapped */}
 
      <Footer />
+     
 
    
     </div>
