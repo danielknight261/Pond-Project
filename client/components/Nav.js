@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'next/link'
 
 const Nav = () => {
   return (
@@ -50,6 +51,7 @@ const Nav = () => {
         </div>
 
         {/* Login/Upload/Container */}
+        <Link href="LoginPage">
         <div className="flex gap-2 py-2 p-4 border border-gray-400 rounded-full ">
           <div className="">Upload</div>
           <div className="border-l border-gray-300"></div>
@@ -68,6 +70,7 @@ const Nav = () => {
             </svg>
           </div>
         </div>
+        </Link>
       </header>
     </div>
   );
