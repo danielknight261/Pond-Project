@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 const User = require("./models/User");
+const cookieParser = require('cookie-parser')
 require("dotenv").config();
 const app = express();
 
@@ -11,7 +12,7 @@ const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'j55439t04jngfnkj644j2323'
 
 app.use(express.json());
-
+app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
@@ -59,6 +60,11 @@ app.post("/login", async (req, res) => {
     json("not found");
   }
 });
+
+app.get('/profile',  (req,res) => {
+  const {token} = req.cookies;
+  res.json({token});
+})
 
 app.listen(4000, () => {
   console.log("Server is running on port 4000");
