@@ -14,11 +14,11 @@ const LoginPage = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    if (redirect) {
-      router.push('/');
-    }
-  }, [redirect]);
+  // useEffect(() => {
+  //   if (redirect) {
+  //     router.push('/');
+  //   }
+  // }, [redirect]);
 
   async function handleLoginSubmit(ev){
     ev.preventDefault();

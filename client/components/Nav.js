@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from 'next/link'
+import { UserContext } from "../components/UserContext"
+
+
 
 const Nav = () => {
+
+  const {user} = useContext(UserContext);
   return (
     <div>
       <header className="p-4 flex justify-between">
@@ -69,7 +74,13 @@ const Nav = () => {
               />
             </svg>
           </div>
+          {!!user && (
+          <div>
+            {user.name}
+          </div>
+        )}
         </div>
+        
         </Link>
       </header>
     </div>
