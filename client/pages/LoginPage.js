@@ -1,21 +1,39 @@
-import React, { useState } from 'react'
-import Link from 'next/link';
+import { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { UserContext } from '../components/UserContext';
+
 
 const LoginPage = () => {
 
   const [email, setEmail] =useState('');
   const [password, setPassword] = useState ('');
+  const [redirect, setRedirect] = useState (true);
+  const {setUser} = useContext(UserContext);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (redirect) {
+      router.push('/');
+    }
+  }, [redirect]);
+
   async function handleLoginSubmit(ev){
     ev.preventDefault();
     try{
-      axios.post("http://localhost:4000/login", { email, password });
+     const {data} = await axios.post("http://localhost:4000/login", { email, password });
+     setUser(data);
 
-    alert('Login Successful')
+    alert('Login Successful');
+    setRedirect(true)
     }catch (e) {
       alert('Login failed')
     }
   }
+
+  axios.defaults.withCredentials = true;
 
   return (
     <div className="mt-4 ">
