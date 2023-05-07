@@ -10,8 +10,10 @@ const Nav = () => {
   return (
     <div>
       <header className="p-4 flex justify-between">
+
         {/* Logo Container*/}
-        <a href="" className="flex items-center text-red-400">
+        <Link href="/">
+        <div href="" className="flex items-center text-red-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -32,7 +34,8 @@ const Nav = () => {
             />
           </svg>
           <span className="font-bold text-xl">Pond</span>
-        </a>
+        </div>
+        </Link>
 
         {/* Search Container*/}
         <div className="flex border border-grey-400 rounded-full py-2 px-10 shadow-md shadow-gray-300">
@@ -56,7 +59,7 @@ const Nav = () => {
         </div>
 
         {/* Login/Upload/Container */}
-        <Link href="LoginPage">
+        <Link href={user ? 'AccountPage' : 'LoginPage'}>
         <div className="flex gap-2 py-2 p-4 border border-gray-400 rounded-full ">
           <div className="">Upload</div>
           <div className="border-l border-gray-300"></div>

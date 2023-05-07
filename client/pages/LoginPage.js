@@ -4,32 +4,30 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { UserContext } from '../components/UserContext';
 
-
 const LoginPage = () => {
-
-  const [email, setEmail] =useState('');
-  const [password, setPassword] = useState ('');
-  const [redirect, setRedirect] = useState (true);
-  const {setUser} = useContext(UserContext);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [redirect, setRedirect] = useState(false);
+  const { setUser } = useContext(UserContext);
 
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (redirect) {
-  //     router.push('/');
-  //   }
-  // }, [redirect]);
+  useEffect(() => {
+    if (redirect) {
+      router.push('/');
+    }
+  }, [redirect]);
 
-  async function handleLoginSubmit(ev){
+  async function handleLoginSubmit(ev) {
     ev.preventDefault();
-    try{
-     const {data} = await axios.post("http://localhost:4000/login", { email, password });
-     setUser(data);
+    try {
+      const { data } = await axios.post('http://localhost:4000/login', { email, password });
+      setUser(data);
 
-    alert('Login Successful');
-    setRedirect(true)
-    }catch (e) {
-      alert('Login failed')
+      alert('Login Successful');
+      setRedirect(true);
+    } catch (e) {
+      alert('Login failed');
     }
   }
 

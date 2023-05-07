@@ -7,7 +7,9 @@ export function UserContextProvider({ children }) {
   const [user, setUser] = useState(null);
   useEffect(() => {
     if(!user) {
-        axios.get('http://localhost:4000/profile')
+      axios.get('http://localhost:4000/profile').then(({data}) =>{
+        setUser(data);
+      })    
     }
   }, []);
 
