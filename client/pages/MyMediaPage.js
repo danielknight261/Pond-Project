@@ -1,23 +1,7 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../components/UserContext';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import axios from 'axios';
+import React from "react";
+import Link from "next/link";
 
-const AccountPageProfile = () => {
-  const { user, setUser } = useContext(UserContext);
-  const router = useRouter();
-
-  async function logout() {
-    await axios.post('http://localhost:4000/logout');
-    setUser(null);
-    router.push('/');
-  }
-
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
+const MyMediaPage = () => {
   return (
     <div>
       {/* Account Page Nav Container  */}
@@ -83,14 +67,30 @@ const AccountPageProfile = () => {
           My Media
         </Link>
       </nav>
-      <div className="text-center max-w-lg mx-auto">
-        Logged in as {user.name} ({user.email})
-        <button onClick={logout} className="w-full p-2 px-6 bg-red-400 hover:bg-red-100 rounded-full max-w-sm mt-2">
-          Logout
-        </button>
+      <div className="text-center">
+        <Link
+          className="inline-flex gap-1 p-2 px-6 bg-red-400 hover:bg-red-100 rounded-full"
+          href="MyMediaPageUploadForm"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+          Upload new image
+        </Link>
       </div>
     </div>
   );
 };
 
-export default AccountPageProfile;
+export default MyMediaPage;
