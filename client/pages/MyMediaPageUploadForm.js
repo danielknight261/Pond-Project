@@ -1,19 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 
 const MyMediaPageUploadForm = () => {
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [addedPhotos, setAddedPhotos] = useState([]);
+  const [photoLink, setPhotoLink] = useState("");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
+  const [license, setLicense] = useState("");
+
+  function addPhotoByLink () {
+    
+  }
+
   return (
-    <div>
+    <div className="p-4">
       <form>
         <h2 className="text-xl mt-4">Title</h2>
         <input
           type="text"
           placeholder="title - keywords for best search results"
+          value={title}
+          onChange={(ev) => setTitle(ev.target.value)}
         />
         <h2 className="text-xl mt-4">Location</h2>
-        <input type="text" placeholder="location of image - optional" />
+        <input
+          type="text"
+          placeholder="location of image - optional"
+          value={location}
+          onChange={(ev) => setLocation(ev.target.value)}
+        />
         <h2 className="text-xl mt-4">Image</h2>
         <div className="flex gap-2">
-          <input type="text" placeholder={"Add using link ...."} />
+          <input
+            type="text"
+            placeholder={"Add using link ...."}
+            value={photoLink}
+            onChange={(ev) => setPhotoLink(ev.target.value)}
+          />
           <button className="p-2 px-6 bg-red-400 hover:bg-red-100 rounded-2xl">
             Add Photo
           </button>
@@ -35,21 +59,37 @@ const MyMediaPageUploadForm = () => {
           </svg>
           Upload from device
         </button>
+
         <h2 className="text-xl mt-4">Description</h2>
-        <textarea  className="w-full text-xl mt-4"/>
+        <textarea
+          className="w-full text-xl mt-4"
+          value={description}
+          onChange={(ev) => setDescription(ev.target.value)}
+        />
+
         <h2 className="text-xl mt-4">Tags</h2>
-        <input type="text" placeholder="Ad some tags seperate by commas max length 13 characters" />
-        <h2 className="text-xl mt-4">License Type</h2>
-        <label>Choose License:</label>
+        <input
+          type="text"
+          placeholder="Ad some tags separated by commas max length 13 characters"
+          value={tags}
+          onChange={(ev) => setTags(ev.target.value)}
+        />
+
+        <h2 className="text-xl mt-4">Choose License Type</h2>
+        <select
+          id=""
+          value={license}
+          onChange={(ev) => setLicense(ev.target.value)}
+        >
+          <option value="">--Please choose an option--</option>
+          <option value="LL1">LL1</option>
+          <option value="LL2">LL2</option>
+          <option value="LL3">LL3</option>
+        </select>
         <div>
-            <label>
-                <input type="checkbox"/>
-                <span>L1</span>
-                <input type="checkbox"/>
-                <span>L2</span>
-                <input type="checkbox"/>
-                <span>L3</span>
-            </label>
+          <button className=" my-4 bg-red-400 p-2 w-full text-white rounded-2xl">
+            Save
+          </button>
         </div>
       </form>
     </div>
