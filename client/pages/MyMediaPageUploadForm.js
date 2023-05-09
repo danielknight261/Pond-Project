@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const MyMediaPageUploadForm = () => {
   const [title, setTitle] = useState("");
@@ -9,8 +10,14 @@ const MyMediaPageUploadForm = () => {
   const [tags, setTags] = useState("");
   const [license, setLicense] = useState("");
 
-  function addPhotoByLink () {
-    
+  async function addPhotoByLink (ev) {
+    ev.preventDefault();
+
+   const {data:filename} = await axios.post('http://localhost:4000/upload-by-link', {link: photoLink})
+   setAddedPhotos(prev => {
+    return [...prev, filename];
+   });
+   setPhotoLink('');
   }
 
   return (
@@ -30,6 +37,7 @@ const MyMediaPageUploadForm = () => {
           value={location}
           onChange={(ev) => setLocation(ev.target.value)}
         />
+
         <h2 className="text-xl mt-4">Image</h2>
         <div className="flex gap-2">
           <input
@@ -38,10 +46,16 @@ const MyMediaPageUploadForm = () => {
             value={photoLink}
             onChange={(ev) => setPhotoLink(ev.target.value)}
           />
-          <button className="p-2 px-6 bg-red-400 hover:bg-red-100 rounded-2xl">
+          <button onClick={addPhotoByLink} className="p-2 px-6 bg-red-400 hover:bg-red-100 rounded-2xl">
             Add Photo
           </button>
         </div>
+        <div>
+        {addedPhotos.length > 0 && addedPhotos.map(link => (
+          <div>
+            {link}
+          </div>
+        ))};
         <button className="flex gap-1 justify-center border bg-transparent rounded-2xl p-8 text-2xl text-gray-600">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -59,6 +73,7 @@ const MyMediaPageUploadForm = () => {
           </svg>
           Upload from device
         </button>
+        </div>
 
         <h2 className="text-xl mt-4">Description</h2>
         <textarea

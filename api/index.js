@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 const User = require("./models/User");
 const cookieParser = require('cookie-parser')
+const imageDownloader = require('image-downloader')
 require("dotenv").config();
 const app = express();
 
@@ -13,6 +14,7 @@ const jwtSecret = 'j55439t04jngfnkj644j2323'
 
 app.use(express.json());
 app.use(cookieParser());
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(
   cors({
     credentials: true,
@@ -81,10 +83,21 @@ app.post('/logout', (req,res) => {
   res.cookie('token', '').json(true)
 })
 
-app.post('/upload-by-link', (req,res) => {
-  const {link} = req.body;
-})
+app.post('/upload-by-link', async (req, res) => {
+  const { link } = req.body;
+  const newName = 'PhotoPond' + Date.now() + '.jpg';
 
+  try {
+    await imageDownloader.image({
+      url: link,
+      dest: __dirname + '/uploads' + newName,
+    });
+    res.json(newName);
+  } catch (error) {
+    console.error('Error downloading image:', error);
+    res.status(500).json({ message: 'Error downloading image' });
+  }
+});
 app.listen(4000, () => {
   console.log("Server is running on port 4000");
 });
