@@ -90,7 +90,7 @@ app.post('/upload-by-link', async (req, res) => {
   try {
     await imageDownloader.image({
       url: link,
-      dest: __dirname + '/uploads' + newName,
+      dest: __dirname + '/uploads/' + newName,
     });
     res.json(newName);
   } catch (error) {

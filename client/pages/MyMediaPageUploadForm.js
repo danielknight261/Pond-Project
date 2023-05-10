@@ -50,13 +50,17 @@ const MyMediaPageUploadForm = () => {
             Add Photo
           </button>
         </div>
-        <div>
-        {addedPhotos.length > 0 && addedPhotos.map(link => (
-          <div>
-            {link}
-          </div>
-        ))};
-        <button className="flex gap-1 justify-center border bg-transparent rounded-2xl p-8 text-2xl text-gray-600">
+        <div className="mt-2 grid gap-2 grid-cols-3">
+          {addedPhotos.length > 0 && addedPhotos.map(link => (
+            <div key={link}>
+              <div>{link}</div>
+              <div>
+                <img  className="rounded-sm" src={'http://localhost:4000/uploads/'+link} alt={link} />
+              </div>
+            </div>
+          ))}
+        
+        <button className="flex items-center gap-1 justify-center border bg-transparent rounded-2xl p-8 text-2xl text-gray-600">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
