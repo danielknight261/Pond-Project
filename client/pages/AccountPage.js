@@ -7,23 +7,23 @@ const AccountPage = () => {
   const { ready, user } = useContext(UserContext);
   const router = useRouter();
 
+  // Check if the user is not available yet, show a loading message
   if (!user) {
     return "Loading...";
   }
 
   useEffect(() => {
+    // Redirect to the login page if the user is not ready and not logged in
     if (ready && !user) {
       router.push("LoginPage");
     }
   }, [ready, user, router]);
 
-
-  
-
   return (
     <div>
-      {/* Account Page Nav Container  */}
+      {/* Account Page Nav Container */}
       <nav className="w-full flex justify-center mt-8 gap-2 mb-8">
+        {/* Link to the account page profile */}
         <Link
           className="inline-flex gap-1 p-2 px-6 bg-red-400 hover:bg-red-100 rounded-full"
           href="AccountPageProfile"
@@ -44,6 +44,8 @@ const AccountPage = () => {
           </svg>
           My Profile
         </Link>
+
+        {/* Link to the favorites page */}
         <Link
           className="inline-flex gap-1 p-2 px-6 bg-red-400 hover:bg-red-100 rounded-full"
           href="FavouritesPage"
@@ -64,6 +66,8 @@ const AccountPage = () => {
           </svg>
           My Favourites
         </Link>
+
+        {/* Link to the media page */}
         <Link
           className="inline-flex gap-1 p-2 px-6 bg-red-400 hover:bg-red-100 rounded-full"
           href="MyMediaPage"

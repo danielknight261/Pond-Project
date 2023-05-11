@@ -1,11 +1,13 @@
 import React from "react";
 import Link from "next/link";
 
+// Define the MyMediaPage component
 const MyMediaPage = () => {
   return (
     <div>
-      {/* Account Page Nav Container  */}
+      {/* Navigation links for the account page */}
       <nav className="w-full flex justify-center mt-8 gap-2 mb-8">
+        {/* Link to the user's profile page */}
         <Link
           className="inline-flex gap-1 p-2 px-6 bg-red-400 hover:bg-red-100 rounded-full"
           href="AccountPageProfile"
@@ -26,6 +28,7 @@ const MyMediaPage = () => {
           </svg>
           My Profile
         </Link>
+        {/* Link to the user's favorites page */}
         <Link
           className="inline-flex gap-1 p-2 px-6 bg-red-400 hover:bg-red-100 rounded-full"
           href="FavouritesPage"
@@ -46,6 +49,7 @@ const MyMediaPage = () => {
           </svg>
           My Favourites
         </Link>
+        {/* Link to the user's media page */}
         <Link
           className="inline-flex gap-1 p-2 px-6 bg-red-400 hover:bg-red-100 rounded-full"
           href="MyMediaPage"
