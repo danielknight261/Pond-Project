@@ -1,8 +1,20 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Link from "next/link";
+import axios from "axios";
 
 // Define the MyMediaPage component
 const MyMediaPage = () => {
+  const [pictures, setPictures] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:4000/pictures').then(({data}) => {
+      setPictures(data);
+
+    })
+  }, [])
+
+
+
   return (
     <div>
       {/* Navigation links for the account page */}
@@ -93,6 +105,27 @@ const MyMediaPage = () => {
           Upload new image
         </Link>
       </div>
+      {/* Users Picture Uploads */}
+<div className="mt-4">
+  {pictures.length > 0 && pictures.map(picture => (
+    <Link href={"MyMediaPageUploadForm" + picture._id}>
+    <div className="flex gap-4 bg-gray-100 p-4 rounded-2xl">
+    <div className="w-32 h-32 bg-gray-300 ">
+      {picture.photos.length > 0 && (
+        <img src={picture.photos[0]} alt="" />
+        )}
+    </div>
+      <div className="grow-0 shrink">
+      <h2 className="text-xl font-bold"> {picture.title}</h2>
+      <p className="text-sm mt-2">{picture.description}</p>
+      <p className="text-sm mt-2">{picture.license}</p>
+      </div>
+    </div>
+    </Link>
+  ))}
+</div>
+
+      
     </div>
   );
 };

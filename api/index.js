@@ -8,7 +8,7 @@ const Picture = require("./models/Picture");
 const cookieParser = require("cookie-parser");
 const imageDownloader = require("image-downloader");
 const multer = require("multer");
-const fs = require("fs"); 
+const fs = require("fs");
 
 require("dotenv").config();
 const app = express();
@@ -116,40 +116,47 @@ app.post("/upload-by-link", async (req, res) => {
   }
 });
 
-const photosMiddleware = multer({dest: 'uploads/' });
-app.post('/upload', photosMiddleware.array("photos", 100), (req, res) => {
-  const uploadedFiles = []
+const photosMiddleware = multer({ dest: "uploads/" });
+app.post("/upload", photosMiddleware.array("photos", 100), (req, res) => {
+  const uploadedFiles = [];
   for (let i = 0; i < req.files.length; i++) {
-    const {path, originalname} = req.files[i];
-    const parts = originalname.split('.');
-    const ext = parts[parts.length -1];
-    const newPath = path + '.' + ext;
+    const { path, originalname } = req.files[i];
+    const parts = originalname.split(".");
+    const ext = parts[parts.length - 1];
+    const newPath = path + "." + ext;
     fs.renameSync(path, newPath);
-    uploadedFiles.push(newPath.replace('uploads/',''));
+    uploadedFiles.push(newPath.replace("uploads/", ""));
   }
   res.json(uploadedFiles);
 });
 
-app.post('/pictures', (req, res) => {
+app.post("/pictures", (req, res) => {
   const { token } = req.cookies;
-  const {
-    title, location, addedPhotos,
-    description, tags, license,
-  } = req.body;
+  const { title, location, photos:addedPhotos, description, tags, license } = req.body;
 
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-    if (err) throw ett;
+    if (err) throw err;
 
-      const pictureDoc = await Picture.create({
-        creator: userData.id,
-        title, location, addedPhotos,
-        description, tags, license,
-      });
-       res.json(pictureDoc);
+    const pictureDoc = await Picture.create({
+      creator: userData.id,
+      title,
+      location,
+      addedPhotos,
+      description,
+      tags,
+      license,
     });
+    res.json(pictureDoc);
   });
+});
 
-
+app.get("/pictures", (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    const { id } = userData;
+    res.json(await Picture.find({ creator: id }));
+  });
+});
 
 app.listen(4000, () => {
   console.log("Server is running on port 4000");
