@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useRouter } from 'next/router';
+import axios from "axios";
 import PhotosUploader from "@/components/PhotosUploader";
 
 // Define a functional component for the upload form
@@ -10,16 +12,28 @@ const MyMediaPageUploadForm = () => {
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
   const [license, setLicense] = useState("");
+  const [redirect, setRedirect] = useState(false);
+
+  // Get the router object
+  const router = useRouter();
 
   // Function to handle adding a new image
-  function addNewImage(ev) {
+  async function addNewPicture(ev) {
     ev.preventDefault();
-    // TODO: Make a POST request to the '/Images' endpoint using axios or a similar library
+    await axios.post('http://localhost:4000/pictures', {
+      title, location, addedPhotos,
+      description, tags, license
+    });
+    setRedirect(true);
+  }
+
+  if (redirect) {
+    router.push('/MyMediaPage');
   }
 
   return (
     <div className="p-4">
-      <form onSubmit={addNewImage}>
+      <form onSubmit={addNewPicture}>
         {/* Title input */}
         <h2 className="text-xl mt-4">Title</h2>
         <input

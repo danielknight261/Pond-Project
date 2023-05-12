@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("./models/User");
+const Picture = require("./models/Picture");
 const cookieParser = require("cookie-parser");
 const imageDownloader = require("image-downloader");
 const multer = require("multer");
@@ -128,6 +129,26 @@ app.post('/upload', photosMiddleware.array("photos", 100), (req, res) => {
   }
   res.json(uploadedFiles);
 });
+
+app.post('/pictures', (req, res) => {
+  const { token } = req.cookies;
+  const {
+    title, location, addedPhotos,
+    description, tags, license,
+  } = req.body;
+
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw ett;
+
+      const pictureDoc = await Picture.create({
+        creator: userData.id,
+        title, location, addedPhotos,
+        description, tags, license,
+      });
+       res.json(pictureDoc);
+    });
+  });
+
 
 
 app.listen(4000, () => {
